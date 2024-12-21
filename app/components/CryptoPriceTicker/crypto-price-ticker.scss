@@ -1,0 +1,87 @@
+.crypto-price-ticker-container {
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(0deg, #000000, #020070);
+    border-radius: 8px;
+    //box-shadow: 0 4px 16px rgb(255, 255, 255);
+    margin-bottom: 20px;
+  }
+  
+  .crypto-price-ticker {
+    display: flex;
+    white-space: nowrap;
+    padding: 15px 0;
+    animation: ticker 10s linear infinite;
+  
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+  
+  .crypto-price-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 30px;
+    padding: 0 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+  }
+  
+  .crypto-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  
+  .crypto-name {
+    font-weight: bold;
+    color: #ffffff;
+    margin-right: 10px;
+  }
+  
+  .crypto-price {
+    color: #a0a0a0;
+    margin-right: 10px;
+  }
+  
+  .crypto-change {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+  
+    &.positive {
+      color: #4caf50;
+    }
+  
+    &.negative {
+      color: #f44336;
+    }
+  
+    svg {
+      margin-right: 2px;
+    }
+  }
+  
+  .crypto-price-ticker-loading {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: #a0a0a0;
+  }
+  
+  @keyframes ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  

@@ -1,0 +1,204 @@
+@use 'sass:color';
+
+// Variables
+$sidebar-bg: var(--card-bg, #010b1b);
+$sidebar-text: var(--foreground, #e2e8f0);
+$sidebar-hover: #0044ff;
+$sidebar-active: color.scale($sidebar-hover, $lightness: -10%);
+$sidebar-width: 250px;
+$sidebar-collapsed-width: 70px;
+$transition-speed: 0.3s;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin hover-effect {
+  transition: all $transition-speed ease;
+  &:hover {
+    background-color: rgba($sidebar-hover, 0.1);
+    color: $sidebar-hover;
+    transform: translateX(5px);
+  }
+}
+
+// Keyframes
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// Main styles
+.sidebar {
+  background-color: $sidebar-bg;
+  width: $sidebar-width;
+  height: 100vh;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: -$sidebar-width;
+  z-index: 999;
+  transition: all $transition-speed ease;
+  overflow-y: auto;
+
+  &.open {
+    left: 0;
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .logo h1 {
+      color: $sidebar-text;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(45deg, $sidebar-text, $sidebar-hover);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeIn 1s ease-in-out;
+    }
+  }
+
+  nav {
+    flex-grow: 1;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      color: $sidebar-text;
+      border-radius: 0.5rem;
+      @include hover-effect;
+
+      &.active {
+        background-color: $sidebar-active;
+        color: #ffffff;
+        transform: translateX(5px);
+      }
+
+      .icon {
+        @include flex-center;
+        width: 24px;
+        height: 24px;
+      }
+
+      .label {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba($sidebar-text, 0.1);
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba($sidebar-text, 0.7);
+  }
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: $sidebar-text;
+  cursor: pointer;
+  padding: 0;
+  @include hover-effect;
+}
+
+.sidebar-toggle-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 0.5rem;
+  background-color: $sidebar-hover;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1000;
+  transition: background-color $transition-speed ease;
+  @include flex-center;
+
+  &:hover {
+    background-color: $sidebar-active;
+  }
+}
+
+// Media queries for responsiveness
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    left: -100%;
+  }
+
+  .sidebar-toggle-btn {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    left: 0;
+    width: $sidebar-collapsed-width;
+
+    .logo h1, .label, .sidebar-footer {
+      display: none;
+    }
+
+    .menu-item {
+      justify-content: center;
+
+      .icon {
+        margin-right: 0;
+      }
+    }
+
+    &:hover {
+      width: $sidebar-width;
+
+      .logo h1, .label, .sidebar-footer {
+        display: block;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      .menu-item {
+        justify-content: flex-start;
+
+        .icon {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+
+  .sidebar-toggle-btn {
+    display: none;
+  }
+}
+

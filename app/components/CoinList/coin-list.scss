@@ -1,0 +1,32 @@
+.coin-list {
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+  }
+
+  .coin-name {
+    display: flex;
+    align-items: center;
+  }
+  
+  .coin-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.75rem;
+  }
+  
+  .coin-symbol {
+    margin-left: 0.5rem;
+    color: var(--secondary);
+    font-size: 0.875rem;
+  }
+  
+  .positive {
+    color: var(--positive);
+  }
+  
+  .negative {
+    color: var(--negative);
+  }

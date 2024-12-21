@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+// Variables
+$background: linear-gradient(135deg, rgb(0, 7, 24) 0%, rgb(0, 0, 0) 100%);
+$foreground: #e2e8f0;
+$primary: rgb(255, 255, 255);
+$secondary: #64748b;
+$tertiary: #0044ff;
+$accent: #ff5e00;
+$card-bg: rgb(1, 11, 27);
+$positive: #10b981;
+$negative: #ef4444;
+$sidebar-width: 250px;
+$sidebar-collapsed-width: 70px;
+$header-height: 60px;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+// Reset and base styles
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: $background;
+  color: $foreground;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// App layout
+.app {
+  display: flex;
+  min-height: 100vh;
+
+  &.sidebar-open {
+    @media (min-width: 769px) {
+      padding-left: $sidebar-width;
+    }
+  }
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  @include transition(margin-left);
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 1.5rem;
+  margin-top: $header-height;
+  width: 100%;
+  max-width: 100%;
+}
+
+// Sidebar toggle button
+.sidebar-toggle-btn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  background-color: $tertiary;
+  color: $primary;
+  border: none;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  @include transition(background-color);
+  @include flex-center;
+
+  &:hover {
+    background-color: darken($tertiary, 10%);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($tertiary, 0.5);
+  }
+}
+
+// Responsive styles
+@media (min-width: 769px) {
+  .app {
+    padding-left: $sidebar-collapsed-width;
+  }
+
+  .content-wrapper {
+    margin-left: 0;
+  }
+
+  .sidebar-toggle-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    z-index: 1001;
+    @include transition(left);
+
+    .app.sidebar-open & {
+      left: 0;
+    }
+  }
+
+  .content-wrapper {
+    margin-left: 0;
+  }
+
+  .main-content {
+    padding: 1rem;
+    margin-top: calc(#{$header-height} + 1rem);
+  }
+
+  .full-width-chart {
+    margin-bottom: 1rem;
+  }
+
+  .dashboard-widgets {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: $tertiary;
+  text-decoration: none;
+  @include transition(color);
+
+  &:hover {
+    color: $accent;
+  }
+}
+
+// Utility classes
+.text-primary { color: $primary; }
+.text-secondary { color: $secondary; }
+.text-tertiary { color: $tertiary; }
+.text-accent { color: $accent; }
+.text-positive { color: $positive; }
+.text-negative { color: $negative; }
+
+.bg-card { background-color: $card-bg; }
+
+.rounded { border-radius: 0.375rem; }
+.shadow { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+
+.p-2 { padding: 0.5rem; }
+.p-4 { padding: 1rem; }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba($secondary, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: $tertiary;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $accent;
+}
+

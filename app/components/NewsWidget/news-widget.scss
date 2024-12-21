@@ -1,0 +1,155 @@
+@use 'sass:color';
+
+// Variables
+$primary-color: #0044ff;
+$secondary-color: #e2e8f0;
+$text-color: #cecece;
+$accent-color: #e74c3c;
+
+// Mixins
+@mixin card-shadow {
+  box-shadow: 0 2px 2px rgb(255, 255, 255);
+}
+
+@mixin hover-transition {
+  transition: all 0.3s ease;
+}
+
+// Main styles
+.news-widget {
+  font-family: 'Roboto', Arial, sans-serif;
+  border-radius: 12px;
+  padding: 24px;
+
+  h3 {
+    color: $secondary-color;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background-color: $primary-color;
+      margin: 0.5rem auto 0;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .news-item {
+    display: flex;
+    margin-bottom: 1.5rem;
+    background-color: rgb(0, 0, 0);
+    border-radius: 8px;
+    overflow: hidden;
+    @include card-shadow;
+    @include hover-transition;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 4px rgb(0, 38, 255);
+    }
+  }
+
+  .news-image-container {
+    flex: 0 0 120px;
+    position: relative;
+    overflow: hidden;
+
+    .news-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      @include hover-transition;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .news-content {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    a {
+      text-decoration: none;
+      color: $text-color;
+      @include hover-transition;
+
+      &:hover {
+        color: $primary-color;
+      }
+
+      h4 {
+        margin: 0 0 0.5rem;
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+    }
+
+    .author {
+      font-size: 0.8rem;
+      color: color.scale($text-color, $lightness: 30%);
+      margin: 0;
+    }
+
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: color.scale($text-color, $lightness: 30%);
+
+      .source {
+        font-weight: bold;
+      }
+
+      .published-at {
+        font-style: italic;
+      }
+    }
+  }
+
+  .load-more {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    @include hover-transition;
+
+    &:hover {
+      background-color: color.scale($primary-color, $lightness: -25%);
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .news-widget {
+    .news-item {
+      flex-direction: column;
+    }
+
+    .news-image-container {
+      flex: 0 0 200px;
+    }
+  }
+}
+

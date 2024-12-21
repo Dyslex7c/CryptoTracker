@@ -1,0 +1,158 @@
+@use 'sass:color';
+
+// Variables
+$primary-color: #f6fcff;
+$secondary-color: #0084ff;
+$accent-color: #e74c3c;
+$background-light: #000000;
+$background-dark: #1a1a1a;
+$text-light: #e2e8f0;
+$text-dark: #e2e8f0;
+
+// Mixins
+@mixin card($bg-color, $text-color) {
+  background-color: $bg-color;
+  color: $text-color;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(255, 255, 255);
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Fade-up animation
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-up-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+// Main styles
+.advanced-analytics {
+  font-family: 'Roboto', Arial, sans-serif;
+  padding: 2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.dark-mode {
+    background-color: $background-dark;
+    color: $text-dark;
+
+    .analytics-item {
+      @include card($secondary-color, $text-dark);
+    }
+
+    .chart-container {
+      background-color: color.scale($background-dark, $lightness: 10%);
+    }
+  }
+
+  h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: $primary-color;
+  }
+
+  .analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .analytics-item {
+    @include card($background-light, $text-light);
+    @include flex-center;
+    flex-direction: column;
+
+    h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: $secondary-color;
+    }
+
+    p {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $accent-color;
+    }
+
+    &.fear-greed {
+      grid-column: span 2;
+
+      .index-value {
+        font-size: 3rem;
+        margin: 1rem 0;
+      }
+
+      .index-label {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+  }
+
+  .chart-container {
+    background-color: $background-light;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .mode-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .advanced-analytics {
+    .analytics-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .analytics-item.fear-greed {
+      grid-column: span 1;
+    }
+  }
+}
+
