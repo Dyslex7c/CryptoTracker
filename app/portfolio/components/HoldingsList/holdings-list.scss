@@ -1,0 +1,62 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.holdings-list {
+  @include card;
+  padding: 1.5rem;
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-primary);
+  }
+
+  th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  th {
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  &__asset {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__icon {
+    font-size: 1.2rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-primary);
+    border-radius: 50%;
+  }
+
+  &__symbol {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .positive {
+    color: var(--color-positive);
+  }
+
+  .negative {
+    color: var(--color-negative);
+  }
+}
+

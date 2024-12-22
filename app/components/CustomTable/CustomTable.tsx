@@ -1,32 +1,38 @@
-import React, { useState } from 'react';
-import { ArrowUp, ArrowDown } from 'lucide-react';
-import "./custom-table.scss";
+import React, { useState } from 'react'
+import { ArrowUp, ArrowDown } from 'lucide-react'
+import "./custom-table.scss"
 
 interface Column<T> {
-  key: keyof T;
-  label: string;
-  sortable?: boolean;
-  render?: (value: any, item: T) => React.ReactNode;
+  key: keyof T
+  label: string
+  sortable?: boolean
+  render?: (value: any, item: T) => React.ReactNode
 }
 
 interface TableProps<T> {
-  columns: Column<T>[];
-  data: T[];
-  onSort?: (key: keyof T, direction: 'asc' | 'desc') => void;
+  columns: Column<T>[]
+  data: T[]
+  onSort?: (key: keyof T, direction: 'asc' | 'desc') => void
+  onRowHover?: (item: T) => void
 }
 
-const CustomTable = <T extends Record<string, any>>({ columns, data, onSort }: TableProps<T>) => {
-  const [sortColumn, setSortColumn] = useState<keyof T | null>(null);
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+const CustomTable = <T extends Record<string, any>>({
+  columns,
+  data,
+  onSort,
+  onRowHover
+}: TableProps<T>) => {
+  const [sortColumn, setSortColumn] = useState<keyof T | null>(null)
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
   const handleSort = (key: keyof T) => {
     if (onSort) {
-      const newDirection = sortColumn === key && sortDirection === 'asc' ? 'desc' : 'asc';
-      setSortColumn(key);
-      setSortDirection(newDirection);
-      onSort(key, newDirection);
+      const newDirection = sortColumn === key && sortDirection === 'asc' ? 'desc' : 'asc'
+      setSortColumn(key)
+      setSortDirection(newDirection)
+      onSort(key, newDirection)
     }
-  };
+  }
 
   return (
     <div className="custom-table-container">
@@ -51,7 +57,11 @@ const CustomTable = <T extends Record<string, any>>({ columns, data, onSort }: T
         </thead>
         <tbody>
           {data.map((row, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              onMouseEnter={() => onRowHover && onRowHover(row)}
+              onMouseLeave={() => {}}
+            >
               {columns.map((column) => (
                 <td key={String(column.key)}>
                   {column.render ? column.render(row[column.key], row) : row[column.key]}
@@ -62,8 +72,8 @@ const CustomTable = <T extends Record<string, any>>({ columns, data, onSort }: T
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default CustomTable;
+export default CustomTable
 

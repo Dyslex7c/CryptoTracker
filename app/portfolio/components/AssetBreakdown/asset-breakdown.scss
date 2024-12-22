@@ -1,0 +1,20 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.asset-breakdown {
+  @include card;
+  padding: 1.5rem;
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  &__chart {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+

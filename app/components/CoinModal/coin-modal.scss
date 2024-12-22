@@ -1,0 +1,140 @@
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.coin-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 320px;
+  background-color: rgb(0, 0, 0);
+//   border-radius: 12px;
+  box-shadow: 0 20px 25px rgb(0, 81, 255);
+  opacity: 0;
+  transition: all 0.3s ease;
+
+  &.show {
+    animation: fadeIn 0.3s ease forwards;
+  }
+}
+
+.coin-modal-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgb(0, 0, 0), rgb(0, 81, 255));
+  border-radius: 12px 12px 0 0;
+  color: var(--text-light);
+}
+
+.coin-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.coin-modal-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  animation: pulse 2s infinite;
+}
+
+.coin-modal-price {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-light);
+}
+
+.coin-modal-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+
+.coin-modal-tab {
+  flex: 1;
+  padding: 12px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.active {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+  }
+
+  &:hover {
+    background-color: var(--background-hover);
+  }
+}
+
+.coin-modal-content {
+  padding: 20px;
+}
+
+.coin-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.coin-modal-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.coin-modal-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.coin-modal-footer {
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.coin-modal-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: rgb(255, 51, 0);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.positive {
+  color: var(--positive);
+}
+
+.negative {
+  color: var(--negative);
+}
+

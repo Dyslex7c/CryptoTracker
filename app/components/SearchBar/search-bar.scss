@@ -1,0 +1,77 @@
+.search-bar {
+  margin-bottom: 1.5rem;
+
+  &__wrapper {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 12px 20px;
+    padding-right: 40px;
+    font-size: 16px;
+    color: #b1b1b1;
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
+    }
+
+    &::placeholder {
+      color: #777777;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    pointer-events: none;
+    transition: color 0.3s ease;
+  }
+
+  &:hover {
+    .search-bar__icon {
+      color: var(--primary);
+    }
+  }
+}
+
+// Dark mode styles
+.dark-mode {
+  .search-bar {
+    &__input {
+      background-color: var(--background-dark);
+      border-color: var(--border-dark);
+
+      &:focus {
+        border-color: var(--primary-dark);
+        box-shadow: 0 0 0 3px rgba(var(--primary-dark-rgb), 0.2);
+      }
+
+      &::placeholder {
+        color: var(--text-secondary-dark);
+      }
+    }
+
+    &__icon {
+      color: var(--text-secondary-dark);
+    }
+
+    &:hover {
+      .search-bar__icon {
+        color: var(--primary-dark);
+      }
+    }
+  }
+}
+

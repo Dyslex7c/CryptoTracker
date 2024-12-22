@@ -1,0 +1,64 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.portfolio-summary {
+  @include card;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+
+  &__value {
+    flex: 1;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+  }
+
+  &__amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  &__change {
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    &.positive {
+      color: var(--color-positive);
+    }
+
+    &.negative {
+      color: var(--color-negative);
+    }
+  }
+
+  &__chart {
+    flex: 1;
+    max-width: 300px;
+    .chartjs-render-monitor {
+      filter: invert(1) hue-rotate(180deg);
+    }
+  }
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__chart {
+      width: 100%;
+      max-width: none;
+      margin-top: 1rem;
+      .chartjs-render-monitor {
+        filter: invert(1) hue-rotate(180deg);
+      }
+    }
+  }
+}
+

@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import CustomTable from '../CustomTable/CustomTable';
 import { formatCurrency, formatPercentage } from '../../utils/formatters';
-import "./coin-list.scss"
+import CoinModal from '../CoinModal/CoinModal';
+import { useHover } from '@/app/hooks/useHover';
+import './coin-list.scss';
 
 interface Coin {
+  id: string;
   market_cap_rank: number;
   name: string;
   symbol: string;
@@ -12,6 +15,10 @@ interface Coin {
   price_change_percentage_24h: number;
   market_cap: number;
   total_volume: number;
+  high_24h: number;
+  low_24h: number;
+  ath: number;
+  atl: number;
 }
 
 interface Column<T> {
@@ -21,8 +28,16 @@ interface Column<T> {
   render?: (value: any, item: T) => React.ReactNode;
 }
 
-const CoinList = ({ coins }: { coins: Coin[] }) => {
+interface CoinListProps {
+  coins: Coin[];
+  onFavoriteToggle: (coinId: string) => void;
+  favoriteCoins: string[];
+}
+
+const CoinList: React.FC<CoinListProps> = ({ coins, onFavoriteToggle, favoriteCoins }) => {
   const [sortedCoins, setSortedCoins] = useState(coins);
+  const [hoverRef, isHovered] = useHover<HTMLDivElement>();
+  const [hoveredCoin, setHoveredCoin] = useState<Coin | null>(null);
 
   const handleSort = (key: keyof Coin, direction: 'asc' | 'desc') => {
     const sorted = [...sortedCoins].sort((a, b) => {
@@ -75,14 +90,38 @@ const CoinList = ({ coins }: { coins: Coin[] }) => {
       sortable: true,
       render: (value: number) => formatCurrency(value),
     },
+    {
+      key: 'id',
+      label: 'Favorite',
+      render: (value: string) => (
+        <button
+          className={`favorite-button ${favoriteCoins.includes(value) ? 'active' : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onFavoriteToggle(value);
+          }}
+        >
+          ★
+        </button>
+      ),
+    },
   ];
 
   return (
-    <div className="coin-list">
-      <CustomTable columns={columns} data={sortedCoins} onSort={handleSort} />
+    <div
+      ref={hoverRef}
+      className="coin-list"
+      onMouseLeave={() => setHoveredCoin(null)}
+    >
+      <CustomTable
+        columns={columns}
+        data={sortedCoins}
+        onSort={handleSort}
+        onRowHover={setHoveredCoin}
+      />
+      {isHovered && hoveredCoin && <CoinModal coin={hoveredCoin} />}
     </div>
   );
 };
 
 export default CoinList;
-
