@@ -31,6 +31,8 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  console.log(searchTerm);
+  
   const [favoriteCoins, setFavoriteCoins] = useState<string[]>([]);
 
   useEffect(() => {
@@ -54,10 +56,16 @@ const Dashboard = () => {
   }, []);
 
   const filteredCoins = coins.filter(
-    (coin) =>
+    (coin) => {
+      console.log(coin.name.toLowerCase().includes(searchTerm.toLowerCase()));
+      
       coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+    }
   );
+
+  console.log(filteredCoins);
+  
 
   const toggleFavorite = (coinId: string) => {
     setFavoriteCoins((prev) =>
@@ -71,7 +79,7 @@ const Dashboard = () => {
         <header className="dashboard-header">
           <h1>Cryptocurrency Dashboard</h1>
         </header>
-        <SearchBar onSearch={setSearchTerm} />
+        <SearchBar onSearch={(term: string) => setSearchTerm(term)} />
       </div>
       <CryptoPriceTicker />
       {loading ? (

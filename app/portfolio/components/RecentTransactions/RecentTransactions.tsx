@@ -1,24 +1,12 @@
 import React, { useState } from 'react'
+import { Transaction } from '../../page'
 import './recent-transactions.scss'
 
-interface Transaction {
-  id: string
-  date: string
-  type: 'buy' | 'sell' | 'transfer'
-  asset: string
-  amount: number
-  value: number
+interface RecentTransactionsProps {
+  transactions: Transaction[];
 }
 
-const mockTransactions: Transaction[] = [
-  { id: '1', date: '2023-04-15 14:30', type: 'buy', asset: 'BTC', amount: 0.5, value: 22500 },
-  { id: '2', date: '2023-04-14 10:15', type: 'sell', asset: 'ETH', amount: 2, value: 6000 },
-  { id: '3', date: '2023-04-13 18:45', type: 'transfer', asset: 'ADA', amount: 1000, value: 1200 },
-  { id: '4', date: '2023-04-12 09:00', type: 'buy', asset: 'DOT', amount: 50, value: 1000 },
-  { id: '5', date: '2023-04-11 16:20', type: 'sell', asset: 'SOL', amount: 10, value: 1500 },
-]
-
-const RecentTransactions: React.FC = () => {
+const RecentTransactions: React.FC<RecentTransactionsProps> = ({ transactions }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -36,9 +24,9 @@ const RecentTransactions: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {mockTransactions.map((transaction) => (
+            {transactions.map((transaction) => (
               <tr key={transaction.id}>
-                <td>{transaction.date}</td>
+                <td>{new Date(transaction.date).toLocaleString()}</td>
                 <td className={`transaction-type ${transaction.type}`}>{transaction.type}</td>
                 <td>{transaction.asset}</td>
                 <td>{transaction.amount}</td>

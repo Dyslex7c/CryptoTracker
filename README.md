@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CryptoTracker
 
-## Getting Started
+**CryptoTracker** is a feature-rich cryptocurrency portfolio and analytics platform designed to provide real-time insights into the dynamic world of digital assets. This app offers a wide range of functionalities, from tracking real-time cryptocurrency prices to advanced analytics, news updates, and portfolio management.
 
-First, run the development server:
+### Portfolio Management Smart Contract Address (Deployed on Base Sepolia testnet): 0x42099C07116c6F5ff671d28F4c348ECc7F882Be4
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Real-Time Cryptocurrency Prices
+- Track real-time price data for thousands of cryptocurrencies.
+- View price changes and trends over 24 hours with percentage changes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Advanced Analytics
+- Visualize data with charts and graphs for in-depth market analysis.
+- Monitor historical data trends for smarter decision-making.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Fear and Greed Index
+- Gauge the market sentiment with the Fear and Greed Index.
+- Make informed trading decisions based on the emotional state of the market.
 
-## Learn More
+### Currency Converter
+- Instantly convert between fiat and cryptocurrency pairs.
+- Support for multiple currencies.
 
-To learn more about Next.js, take a look at the following resources:
+### Crypto News
+- Stay up-to-date with the latest news in the cryptocurrency space.
+- Explore curated articles and insights from trusted sources.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Portfolio Management
+- Add, update, and remove assets from your portfolio.
+- Calculate total portfolio value in real-time.
+- Securely integrate blockchain for decentralized asset management.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## How It Works
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Add Assets to Your Portfolio**
+   - Use the intuitive "Add Asset" button to search for cryptocurrencies and input the amount owned.
+   - Portfolio values are calculated in real-time based on current market prices.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Real-Time Data Fetching**
+   - Cryptocurrency data is fetched via external APIs for price tracking, analytics, and news updates.
+
+3. **Blockchain Integration**
+   - Leverage a Solidity-based smart contract for secure and decentralized portfolio storage.
+   - Assets added to the portfolio are linked to the user’s wallet address.
+
+---
+
+## Screenshots
+
+![alt text](image.png)
+
+![alt text](image-1.png)
