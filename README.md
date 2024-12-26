@@ -1,6 +1,6 @@
 # CryptoTracker
 
-**CryptoTracker** is a feature-rich cryptocurrency portfolio and analytics platform designed to provide real-time insights into the dynamic world of digital assets. This app offers a wide range of functionalities, from tracking real-time cryptocurrency prices to advanced analytics, news updates, and portfolio management.
+**CryptoTracker** is a UI-rich cryptocurrency portfolio and analytics platform designed to provide real-time insights into the dynamic world of digital assets. This app offers a wide range of functionalities, from tracking real-time cryptocurrency prices to advanced analytics, news updates, and portfolio management. Made this app during my free time in order to sharpen my frontend development skills and also learnt how to use Sass(SCSS).
 
 ### Portfolio Management Smart Contract Address (Deployed on Base Sepolia testnet): 0x42099C07116c6F5ff671d28F4c348ECc7F882Be4
 
@@ -53,3 +53,5 @@
 ![alt text](image.png)
 
 ![alt text](image-1.png)
+
+![alt text](image-2.png)
